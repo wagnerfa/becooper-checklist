@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+h1 {
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+}
+
+p {
+    font-family: 'Lato', sans-serif;
+}
+
+.box {
+    position: absolute;
+    background-color: black;
+    border-radius: 20px;
+    padding: 20px;
+    width: 300px;
+    height: 150px;
+    color: white;
+    font-family: 'Oswald', sans-serif;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.box1 {
+    top: 60px;
+    left: 70px;
+}
+
+.box2 {
+    top: 60px;
+    right: 70px;
+}
+
+.box3 {
+    bottom: 30px;
+    left: 70px;
+}
+
+.box4 {
+    bottom: 30px;
+    right: 70px;
+}
+
+.box5 {
+    top: 240px;
+    left: 50%;
+    transform: translateX(-50%);
+}
