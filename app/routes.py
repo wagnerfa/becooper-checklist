@@ -9,12 +9,12 @@ def index():
 
 @main.route('/cadastro_salas')
 def cadastro_salas():
-    return render_template('index.html')
+    return render_template('cadastro_salas.html')
 
 
 @main.route('/cadastro_equipamentos')
 def cadastro_equipamentos():
-    return render_template('index.html')
+    return render_template('cadastro_equipamentos.html')
 
 
 @main.route('/formulario')
