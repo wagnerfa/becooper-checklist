@@ -4,11 +4,6 @@ main = Blueprint('main', __name__)
 
 
 @main.route('/')
-def index():
-    return render_template('index.html')
-
-
-@main.route('/cadastro_salas')
 def cadastro_salas():
     return render_template('cadastro_salas.html')
 
