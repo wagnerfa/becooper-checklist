@@ -9,21 +9,31 @@
 </head>
 
 <body>
-    <form>
-        <div class="campo">
-            <label for="nome">Nome</label>
-            <input type="text">
-        </div>
-        <div class="campo">
-            <label for="capacidade">Capacidade</label>
-            <input type="number">
-        </div>
-        <a href="" style="grid-column: span 2;">
+    <div class="sidebar">
+        <h1>Check List</h1>
+        <a href="/cadastro_salas">Salas</a>
+        <a href="/cadastro_equipamentos">Equipamentos</a>
+        <a href="/formulario/cadastro">Formulários</a>
+        <a href="">Enviar Formulários</a>
+        <a href="">Configuração</a>
+    </div>
+    <div class="conteudo">
+        <form>
             <div class="campo">
-                <button>Confirmar</button>
+                <label for="nome">Nome</label>
+                <input type="text">
             </div>
-        </a>
-    </form>
+            <div class="campo">
+                <label for="capacidade">Capacidade</label>
+                <input type="number">
+            </div>
+            <a href="" style="grid-column: span 2;">
+                <div class="campo">
+                    <button>Confirmar</button>
+                </div>
+            </a>
+        </form>
+    </div>
 </body>
 
 </html>
