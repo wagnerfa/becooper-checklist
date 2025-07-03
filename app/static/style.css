@@ -79,8 +79,20 @@ a {
     background: #007bff;
     color: white;
     padding: 20px;
+    box-sizing: border-box;
+    overflow: hidden;
 }
 
+.detalhe-canto {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 200px;
+    height: auto;
+    z-index: 0;
+    pointer-events: none;
+
+}
 
 .sidebar h1 {
     font-size: 22px;
