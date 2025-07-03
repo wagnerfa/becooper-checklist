@@ -2,6 +2,7 @@ from flask import Blueprint, render_template
 
 main = Blueprint('main', __name__)
 
+
 @main.route('/')
 def index():
     return render_template('index.html')
@@ -20,8 +21,6 @@ def cadastro_equipamentos():
 @main.route('/formulario')
 def formulario():
     return render_template('index.html')
-
-
 
 
 @main.route('/formulario/cadastro')
