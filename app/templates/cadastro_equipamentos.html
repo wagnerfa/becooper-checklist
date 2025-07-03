@@ -1,20 +1,35 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/style.css">
     <title>Document</title>
 </head>
-<body>
-    <p>Nome:</p>
-    <input type="text">
-    
-    <p>Quantidade:</p>
-    <input type="number">
-    
-    <p>Valor:</p>
-    <input type="number">
 
-<button>Confirmar</button>
+<body>
+    <form>
+        <div class="campo" style="grid-column: span 2;">
+            <label for="nome">Nome:</label>
+            <input type="text">
+        </div>
+
+        <div class="campo">
+            <label for="quantidade">Quantidade:</label>
+            <input type="number">
+        </div>
+        <div class="campo">
+            <label for="Valor">Valor:</label>
+            <input type="number">
+        </div>
+        <a href="" style="grid-column: span 2;">
+            <div class="campo">
+                <button>Confirmar</button>
+            </div>
+        </a>
+    </form>
+
 </body>
+
 </html>

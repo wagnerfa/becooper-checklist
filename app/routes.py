@@ -22,9 +22,7 @@ def formulario():
     return render_template('index.html')
 
 
-
-
 @main.route('/formulario/cadastro')
 def formulario_cadastro():
-    return render_template('index.html')
+    return render_template('formulario_cadastro.html')
 
