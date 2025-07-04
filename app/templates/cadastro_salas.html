@@ -1,41 +1,22 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+{%extends "base.html"%}
+{%block content%}
 
-<head>
-    <meta charset="pt-br">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="../static/style.css">
-</head>
-
-<body>
-    <div class="sidebar">
-        <h1>Check List</h1>
-        <a href="/">Salas</a>
-        <a href="/cadastro_equipamentos">Equipamentos</a>
-        <a href="/formulario/cadastro">Formulários</a>
-        <a href="">Enviar Formulários</a>
-        <a href="">Configuração</a>
-
-        <img class="detalhe-canto" src="../static/img/marca_becooper.png" alt="Detalhe decorativo">
-    </div>
-    <div class="conteudo">
-        <form>
+<div class="conteudo">
+    <form>
+        <div class="campo">
+            <label for="nome">Nome</label>
+            <input type="text">
+        </div>
+        <div class="campo">
+            <label for="capacidade">Capacidade</label>
+            <input type="number">
+        </div>
+        <a href="" style="grid-column: span 2;">
             <div class="campo">
-                <label for="nome">Nome</label>
-                <input type="text">
+                <button>Confirmar</button>
             </div>
-            <div class="campo">
-                <label for="capacidade">Capacidade</label>
-                <input type="number">
-            </div>
-            <a href="" style="grid-column: span 2;">
-                <div class="campo">
-                    <button>Confirmar</button>
-                </div>
-            </a>
-        </form>
-    </div>
-</body>
+        </a>
+    </form>
+</div>
 
-</html>
+{%endblock%}

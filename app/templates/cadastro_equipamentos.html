@@ -1,46 +1,27 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+{%extends "base.html"%}
+{%block content%}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=, initial-scale=1.0">
-    <link rel="stylesheet" href="../static/style.css">
-    <title>Document</title>
-</head>
+<div class="conteudo">
+    <form>
+        <div class="campo" style="grid-column: span 2;">
+            <label for="nome">Nome:</label>
+            <input type="text">
+        </div>
 
-<body>
-    <div class="sidebar">
-        <h1>Check List</h1>
-        <a href="/">Salas</a>
-        <a href="/cadastro_equipamentos">Equipamentos</a>
-        <a href="/formulario/cadastro">Formulários</a>
-        <a href="">Enviar Formulários</a>
-        <a href="">Configuração</a>
-
-        <img class="detalhe-canto" src="../static/img/marca_becooper.png" alt="Detalhe decorativo">
-    </div>
-    <div class="conteudo">
-        <form>
-            <div class="campo" style="grid-column: span 2;">
-                <label for="nome">Nome:</label>
-                <input type="text">
-            </div>
-
+        <div class="campo">
+            <label for="quantidade">Quantidade:</label>
+            <input type="number">
+        </div>
+        <div class="campo">
+            <label for="Valor">Valor:</label>
+            <input type="number">
+        </div>
+        <a href="" style="grid-column: span 2;">
             <div class="campo">
-                <label for="quantidade">Quantidade:</label>
-                <input type="number">
+                <button>Confirmar</button>
             </div>
-            <div class="campo">
-                <label for="Valor">Valor:</label>
-                <input type="number">
-            </div>
-            <a href="" style="grid-column: span 2;">
-                <div class="campo">
-                    <button>Confirmar</button>
-                </div>
-            </a>
-        </form>
-    </div>
-</body>
+        </a>
+    </form>
+</div>
 
-</html>
+{%endblock%}
