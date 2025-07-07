@@ -1,0 +1,49 @@
+{%extends "base.html"%}
+{%block content%}
+
+<div class="conteudo">
+    <form>
+        <div class="campo">
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" name="nome">
+        </div>
+
+        <div class="campo">
+            <label for="email">E-mail:</label>
+            <input type="email" id="" name="e-mail">
+        </div>
+
+        <div class="campo">
+            <label for="telefone">Telefone</label>
+            <input type="number" id="" name="telefone">
+        </div>
+
+        <div class="campo">
+            <label for="sala">Sala</label>
+            <input type="text" id="" name="sala">
+        </div>
+
+        <div class="campo">
+            <label for="data">Data Locação</label>
+            <input type="date" id="" name="data">
+        </div>
+
+        <div class="campo">
+            <label for="observacoes">Observações responsável Becooper</label>
+            <input type="text" id="" name="observacoes_becooper">
+        </div>
+
+        <div class="campo" style="grid-column: span 2;">
+            <label for="equipamentos">Equipamentos</label>
+            <input type="text" id="" name="equipamentos">
+        </div>
+
+        <a href="" style="grid-column: span 2;">
+            <div class="campo">
+                <button>Confirmar</button>
+            </div>
+        </a>
+    </form>
+</div>
+
+{%endblock%}
