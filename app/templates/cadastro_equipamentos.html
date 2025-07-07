@@ -2,19 +2,19 @@
 {%block content%}
 
 <div class="conteudo">
-    <form>
+    <form method="POST">
         <div class="campo" style="grid-column: span 2;">
             <label for="nome">Nome:</label>
-            <input type="text">
+            <input type="text" name="nome">
         </div>
 
         <div class="campo">
             <label for="quantidade">Quantidade:</label>
-            <input type="number">
+            <input type="number" name="quantidade">
         </div>
         <div class="campo">
             <label for="Valor">Valor:</label>
-            <input type="number">
+            <input type="number" name="valor">
         </div>
         <a href="" style="grid-column: span 2;">
             <div class="campo">
@@ -22,6 +22,33 @@
             </div>
         </a>
     </form>
+    <table class="table-salas">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Quantidade</th>
+                <th>Valor</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in Equipamentos %}
+            <tr>
+                <td>{{ row.nome }}</td>
+                <td>{{ row.quantidade }}</td>
+                <td>
+                    <form method="POST" action="{{ url_for('main.delete_equipamento', id=row.id) }}"
+                        onsubmit="return confirm('Excluir equipamento {{ row.nome }}?')">
+                        <button type="submit">Excluir</button>
+                    </form>
+                </td>
+            </tr>
+            {%else%}
+            <tr>
+                <td colspan="3" style="text-align:center">Nenhum equipamento cadastrada.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </div>
 
 {%endblock%}

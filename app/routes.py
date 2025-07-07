@@ -44,10 +44,38 @@ def delete_sala(sala_id):
     return redirect(url_for('main.cadastro_salas'))
 
 
-@main.route('/cadastro_equipamentos')
+@main.route('/cadastro_equipamentos', methods=['GET', 'POST'])
 def cadastro_equipamentos():
+    if request.method == 'POST':
+        nome = request.form.get('nome')
+        quantidade = request.form.get('quantidade')
+        valor = request.form.get('valor')
+        print(nome)
+        print(quantidade)
+        print(valor)
+        # cria e salva a sala
+        equipamento = Equipamento(nome=nome, valor=valor, quantidade=quantidade)
+        db.session.add(equipamento)
+        db.session.commit()
+        flash('Equipamento cadastrada com sucesso!', 'success')
+        return redirect(url_for('main.cadastro_equipamentos'))
 
-    return render_template('cadastro_equipamentos.html')
+    # (Opcional) buscar todos os Equipamentos para exibir na página
+    tabela = Equipamento.query.all()
+    return render_template('cadastro_equipamentos.html', Equipamentos=tabela)
+
+
+@main.route('/delete_equipamento/<int:id>', methods=['POST'])
+def delete_equipamento(id):
+    sala = Equipamento.query.get_or_404(id)
+    try:
+        db.session.delete(sala)
+        db.session.commit()
+        flash('Sala excluída com sucesso!', 'success')
+    except Exception as e:
+        db.session.rollback()
+        flash(f'Erro ao excluir sala: {e}', 'danger')
+    return redirect(url_for('main.cadastro_equipamentos'))
 
 
 @main.route('/formulario')
