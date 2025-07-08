@@ -18,6 +18,7 @@ class Formulario(db.Model):
     __tablename__ = 'formularios'
     id = db.Column(db.Integer, primary_key=True)
     nome_locatario = db.Column(db.String(100), nullable=False)
+    sala = db.Column(db.string(100), nullable=False)
     email_locatario = db.Column(db.String(120), nullable=False)
     telefone_locatario = db.Column(db.String(30), nullable=True)
     data_locacao = db.Column(db.DateTime, default=datetime.utcnow)

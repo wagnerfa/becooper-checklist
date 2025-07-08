@@ -50,9 +50,6 @@ def cadastro_equipamentos():
         nome = request.form.get('nome')
         quantidade = request.form.get('quantidade')
         valor = request.form.get('valor')
-        print(nome)
-        print(quantidade)
-        print(valor)
         # cria e salva a sala
         equipamento = Equipamento(nome=nome, valor=valor, quantidade=quantidade)
         db.session.add(equipamento)
