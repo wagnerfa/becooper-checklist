@@ -75,6 +75,7 @@ def delete_equipamento(id):
     return redirect(url_for('main.cadastro_equipamentos'))
 
 
+
 @main.route('/formulario')
 def formulario():
     return render_template('index.html')
