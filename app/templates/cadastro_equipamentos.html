@@ -18,7 +18,7 @@
         </div>
         <a href="" style="grid-column: span 2;">
             <div class="campo">
-                <button>Confirmar</button>
+                <button>Cadastrar</button>
             </div>
         </a>
     </form>
@@ -36,10 +36,7 @@
                 <td>{{ row.nome }}</td>
                 <td>{{ row.quantidade }}</td>
                 <td>
-                    <form method="POST" action="{{ url_for('main.delete_equipamento', id=row.id) }}"
-                        onsubmit="return confirm('Excluir equipamento {{ row.nome }}?')">
-                        <button type="submit">Excluir</button>
-                    </form>
+                    <a href="/delete_equipamento/{{row.id}}">🗑️</a>
                 </td>
             </tr>
             {%else%}

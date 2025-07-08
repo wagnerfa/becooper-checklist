@@ -31,7 +31,7 @@ def cadastro_salas():
 
 
 
-@main.route('/delete_sala/<int:sala_id>', methods=['POST'])
+@main.route('/delete_sala/<int:sala_id>', methods=['GET', 'POST'])
 def delete_sala(sala_id):
     sala = Sala.query.get_or_404(sala_id)
     try:
@@ -65,7 +65,7 @@ def cadastro_equipamentos():
     return render_template('cadastro_equipamentos.html', Equipamentos=tabela)
 
 
-@main.route('/delete_equipamento/<int:id>', methods=['POST'])
+@main.route('/delete_equipamento/<int:id>', methods=['POST', 'GET'])
 def delete_equipamento(id):
     sala = Equipamento.query.get_or_404(id)
     try:

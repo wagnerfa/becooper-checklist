@@ -1,61 +1,57 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <div class="conteudo">
+<div class="conteudo">
 
-    <form method="POST" action="{{ url_for('main.cadastro_salas') }}">
-      <div class="campo">
-        <label for="nome">Nome da sala</label>
-        <input type="text" name="nome" id="nome" required>
-      </div>
-      <div class="campo">
-        <label for="capacidade">Capacidade</label>
-        <input type="number" name="capacidade" id="capacidade" required>
-      </div>
-      <div class="campo" style="grid-column: span 2">
-        <button type="submit">Cadastrar</button>
-      </div>
-    </form>
-
-
-    {% with messages = get_flashed_messages(with_categories=true) %}
-      {% if messages %}
-        <ul class="flashes">
-          {% for category, message in messages %}
-            <li class="{{ category }}">{{ message }}</li>
-          {% endfor %}
-        </ul>
-      {% endif %}
-    {% endwith %}
+  <form method="POST" action="{{ url_for('main.cadastro_salas') }}">
+    <div class="campo">
+      <label for="nome">Nome da sala</label>
+      <input type="text" name="nome" id="nome" required>
+    </div>
+    <div class="campo">
+      <label for="capacidade">Capacidade</label>
+      <input type="number" name="capacidade" id="capacidade" required>
+    </div>
+    <div class="campo" style="grid-column: span 2">
+      <button type="submit">Cadastrar</button>
+    </div>
+  </form>
 
 
-    <table class="table-salas">
-      <thead>
-        <tr>
-          <th>Nome</th>
-          <th>Capacidade</th>
-          <th>Ações</th>
-        </tr>
-      </thead>
-      <tbody>
+  {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+  <ul class="flashes">
+    {% for category, message in messages %}
+    <li class="{{ category }}">{{ message }}</li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+  {% endwith %}
+
+
+  <table class="table-salas">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Capacidade</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
       {% for sala in salas %}
-        <tr>
-          <td>{{ sala.nome }}</td>
-          <td>{{ sala.capacidade }}</td>
-          <td>
-            <form method="POST"
-                  action="{{ url_for('main.delete_sala', sala_id=sala.id) }}"
-                  onsubmit="return confirm('Excluir sala {{ sala.nome }}?')">
-              <button type="submit">Excluir</button>
-            </form>
-          </td>
-        </tr>
+      <tr>
+        <td>{{ sala.nome }}</td>
+        <td>{{ sala.capacidade }}</td>
+        <td>
+          <a href="/delete_sala/{{sala.id}}">🗑️</a>
+        </td>
+      </tr>
       {% else %}
-        <tr>
-          <td colspan="3" style="text-align:center">Nenhuma sala cadastrada.</td>
-        </tr>
+      <tr>
+        <td colspan="3" style="text-align:center">Nenhuma sala cadastrada.</td>
+      </tr>
       {% endfor %}
-      </tbody>
-    </table>
-  </div>
+    </tbody>
+  </table>
+</div>
 {% endblock %}
