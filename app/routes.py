@@ -3,6 +3,8 @@ from sqlalchemy.util import methods_equivalent
 
 from .models import *
 
+from .utilities import *
+
 main = Blueprint('main', __name__)
 
 
@@ -80,7 +82,17 @@ def delete_equipamento(id):
 
 @main.route('/formulario')
 def formulario():
-    return render_template('formulario_cadastro.html')
+
+    tabela = Formulario.query.all()
+
+    return render_template('index.html', tabela=tabela)
+
+@main.route('/formulario/visualizar/<id>')
+def formulario_view(id):
+
+    formulario = Formulario.query.filter_by(id=id)
+
+    return render_template('visualizar_formulario.html', formulario=formulario)
 
 
 @main.route('/formulario/cadastro', methods=['GET','POST'])
@@ -104,6 +116,7 @@ def formulario_cadastro():
         data_locacao=data , observacao_responsavel_coop=observacao_responsavel, observacao_locatario=observacao,
         assinatura=assinatura, equipamentos=equipamentos, fotos=1.0)
 
+        send_email(email, "Por favor preencha o link abaixo")
 
         db.session.add(formulario)
         db.session.commit()
@@ -112,3 +125,8 @@ def formulario_cadastro():
 
     return render_template('formulario_cadastro.html')
 
+
+@main.route('/teste-email', methods=['GEt', 'POST'])
+def teste_email():
+
+    return send_email('pedro.santos@becooper.coop.br', corpo='TESTE123'),
