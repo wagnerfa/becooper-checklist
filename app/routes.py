@@ -104,7 +104,7 @@ def formulario_cadastro():
         data_locacao=data , observacao_responsavel_coop=observacao_responsavel, observacao_locatario=observacao,
         assinatura=assinatura, equipamentos=equipamentos, fotos=1.0)
 
-        print (formulario)
+
         db.session.add(formulario)
         db.session.commit()
 
