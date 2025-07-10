@@ -83,7 +83,7 @@ def formulario():
     return render_template('formulario_cadastro.html')
 
 
-@main.route('/formulario/cadastro', methods=['POST'])
+@main.route('/formulario/cadastro', methods=['GET','POST'])
 def formulario_cadastro():
     if request.method == 'POST':
         nome = request.form.get('nome_locatario')
@@ -92,7 +92,7 @@ def formulario_cadastro():
         data = request.form.get('data_locatario')
         sala = request.form.get('sala_locatario')
         observacao_responsavel = request.form.get('observacao_responsavel_coop')
-        observacao_locatorio = request.form.get('observacao_locatario')
+        observacao = request.form.get('observacao_locatario')
         assinatura = request.form.get('assinatura_locatario')
         equipamentos = request.form.get('equipamentos')
 
@@ -100,9 +100,9 @@ def formulario_cadastro():
         print(email)
         print(telefone)
 
-        formulario = Formulario(nome_locatario=nome, sala=email=email, telefone=telefone,
-        data=data, observacao_responsavel=observacao_responsavel, observacao_locatorio=observacao_locatorio,
-        assinatura=assinatura, equipamentos=equipamentos)
+        formulario = Formulario(nome_locatario=nome, sala=sala, email_locatario=email, telefone_locatario=telefone,
+        data_locacao=data , observacao_responsavel_coop=observacao_responsavel, observacao_locatario=observacao,
+        assinatura=assinatura, equipamentos=equipamentos, fotos=1.0)
 
         print (formulario)
         db.session.add(formulario)
