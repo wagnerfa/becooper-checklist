@@ -120,7 +120,6 @@ a {
     display: flex;
     flex-direction: column;
     align-items: center;
-
     min-height: auto;
 }
 
@@ -147,6 +146,18 @@ form {
     border-bottom: 1px solid #e9ecef;
 }
 
+select:focus {
+    outline: none;
+    border-color: black;
+}
+
+
+/* Alinhamento do Número */
+
+.numero {
+    text-align: left;
+}
+
 .table-salas th {
     background-color: #007bff;
     color: white;
@@ -165,16 +176,10 @@ form {
 .table-salas td a {
     text-decoration: none;
     color: white;
-    background-color: #dc3545;
     padding: 6px 12px;
     border-radius: 4px;
     font-size: 14px;
-    transition: background 0.3s ease;
     display: inline-block;
-}
-
-.table-salas td a:hover {
-    background-color: #c82333;
 }
 
 /* Bottom Select Equipamentos */
@@ -196,7 +201,54 @@ select {
 
 }
 
-select:focus {
-    outline: none;
-    border-color: black;
+/* Forulario View */
+
+.container {
+    max-width: 960px;
+    background-color: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.title {
+    text-align: center;
+    font-size: 30px;
+    font-weight: 600;
+    color: #007bff;
+    margin-bottom: 40px;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 10px;
+}
+
+.section {
+    margin-bottom: 30px;
+    border-left: 4px solid #007bff;
+    padding-left: 20px;
+}
+
+.section-title {
+    font-weight: 600;
+    color: #007bff;
+    font-size: 16px;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.section-value {
+    font-size: 17px;
+    color: #333;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.col {
+    flex: 1;
+    min-width: 250px;
 }

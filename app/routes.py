@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, request, flash, redirect, url_for
 from sqlalchemy.util import methods_equivalent
 
 from .models import *
+from .utilities import *
 
 main = Blueprint('main', __name__)
 
@@ -77,12 +78,6 @@ def delete_equipamento(id):
     return redirect(url_for('main.cadastro_equipamentos'))
 
 
-
-@main.route('/formulario')
-def formulario():
-    return render_template('formulario_cadastro.html')
-
-
 @main.route('/formulario/cadastro', methods=['GET','POST'])
 def formulario_cadastro():
     if request.method == 'POST':
@@ -96,10 +91,6 @@ def formulario_cadastro():
         assinatura = request.form.get('assinatura_locatario')
         equipamentos = request.form.get('equipamentos')
 
-        print(nome)
-        print(email)
-        print(telefone)
-
         formulario = Formulario(nome_locatario=nome, sala=sala, email_locatario=email, telefone_locatario=telefone,
         data_locacao=data , observacao_responsavel_coop=observacao_responsavel, observacao_locatario=observacao,
         assinatura=assinatura, equipamentos=equipamentos, fotos=1.0)
@@ -111,4 +102,21 @@ def formulario_cadastro():
         return redirect(url_for('main.formulario_cadastro'))
 
     return render_template('formulario_cadastro.html')
+
+@main.route('/formulario')
+def formulario():
+
+    tabela = Formulario.query.all()
+
+    return render_template('formulario.html', tabela=tabela)
+
+
+
+@main.route('/formulario/view/<id>')
+def formulario_view(id):
+
+    formulario = Formulario.query.filter_by(id=id).first()
+
+    return render_template('formulario_view.html', formulario=formulario)
+
 

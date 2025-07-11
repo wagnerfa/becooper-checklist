@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="conteudo">
+    <table class="table-salas">
+        <thead>
+            <tr>
+                <th>Nome Locatário</th>
+                <th>Sala</th>
+                <th>Data</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in tabela %}
+            <tr>
+                <td>{{ row.nome }}</td>
+                <td>{{ row.sala }}</td>
+                <td>{{ row.data_locacao }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+{% endblock %}

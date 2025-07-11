@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <link rel="stylesheet" href="../static/style.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='../static/style.css') }}">
 </head>
 
 <body>
@@ -13,8 +13,8 @@
     <h1>Check List</h1>
     <a href="/">Salas</a>
     <a href="/cadastro_equipamentos">Equipamentos</a>
-    <a href="/formulario/cadastro">Formulários</a>
-    <a href="">Enviar Formulários</a>
+    <a href="/formulario">Formulários</a>
+    <a href="/formulario/cadastro">Enviar Formulários</a>
     <a href="">Configuração</a>
 
     <img class="detalhe-canto" src="../static/img/marca_becooper.png" alt="Detalhe decorativo">

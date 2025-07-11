@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block content %}
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+<div class="conteudo">
+    <div class="container">
+        <div class="title">Locação de Sala</div>
+
+        <!-- Locatário -->
+        <div class="section">
+            <div class="section-title">Nome do Locatário</div>
+            <div class="section-value"> {{ formulario.nome_locatario }} </div>
+        </div>
+
+        <!-- Sala e Contato -->
+        <div class="section row">
+            <div class="col">
+                <div class="section-title">Sala</div>
+                <div class="section-value"> {{ formulario.sala }} </div>
+            </div>
+            <div class="col">
+                <div class="section-title">Telefone</div>
+                <div class="section-value"> {{ formulario.telefone_locatario }} </div>
+            </div>
+            <div class="col">
+                <div class="section-title">E-mail</div>
+                <div class="section-value"> {{ formulario.email_locatario }} </div>
+            </div>
+        </div>
+
+        <!-- Data e Observações -->
+        <div class="section row">
+            <div class="col">
+                <div class="section-title">Data da Locação</div>
+                <div class="section-value">  </div>
+            </div>
+            <div class="col">
+                <div class="section-title">Observação (Responsável)</div>
+                <div class="section-value"> {{ formulario.observacao_responsavel_coop }} </div>
+            </div>
+            <div class="col">
+                <div class="section-title">Observação (Locatário)</div>
+                <div class="section-value"> {{ formulario.observacao_locatario }} </div>
+            </div>
+        </div>
+
+        <!-- Equipamentos -->
+        <div class="section">
+            <div class="section-title">Equipamentos</div>
+            <div class="section-value"> {{ formulario.equipamentos }} </div>
+        </div>
+
+        <!-- Assinatura -->
+        <div class="section">
+            <div class="section-title">Assinatura</div>
+            <div class="section-value"> {{ formulario.assinatura }} </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
