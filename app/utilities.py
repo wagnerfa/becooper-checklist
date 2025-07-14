@@ -12,6 +12,7 @@ def send_email(destinatario, corpo):
     
     assunto = 'teste'
 
+
     mensagem = MIMEMultipart()
     mensagem['From'] = usuario
     mensagem['To'] = destinatario

@@ -96,6 +96,7 @@ def formulario_cadastro():
         assinatura=assinatura, equipamentos=equipamentos, fotos=1.0)
 
 
+
         db.session.add(formulario)
         db.session.commit()
 
