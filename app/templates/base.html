@@ -13,15 +13,30 @@
 <body>
   <div class="sidebar">
     <h1>Check List</h1>
-    <a href="/">Salas</a>
-    <a href="/cadastro_equipamentos">Equipamentos</a>
-    <a href="/formulario">Formulários</a>
-    <a href="/formulario/cadastro">Enviar Formulários</a>
-    <a href="">Configuração</a>
-
-
-    <img class="detalhe-canto" src="../static/img/marca_becooper.png" alt="Detalhe decorativo">
+    <div>
+      <a href="/">Salas</a>
+      <a href="/cadastro_equipamentos">Equipamentos</a>
+      <a href="/formulario">Formulários</a>
+      <a href="/formulario/cadastro">Enviar Formulários</a>
+      <a href="/configuracao">Configuração</a>
+    </div>
   </div>
+
+
+  <img class="detalhe-canto" src="../static/img/marca_becooper.png" alt="Detalhe decorativo">
+  </div>
+  
+  <script>
+    const links = document.querySelectorAll('.sidebar a');
+    const currentPath = window.location.pathname;
+
+    links.forEach(link => {
+      if (link.getAttribute('href') === currentPath) {
+        link.classList.add('active');
+      }
+    });
+  </script>
+
   {%block content%}
   {%endblock%}
 </body>

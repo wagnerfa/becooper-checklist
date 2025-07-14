@@ -96,6 +96,7 @@ a {
     height: auto;
     z-index: 0;
     pointer-events: none;
+    position: fixed;
 
 }
 
@@ -117,6 +118,13 @@ a {
     padding-left: 10px;
 }
 
+.sidebar a.active {
+    background-color: #004080;
+    border-radius: 5px;
+    padding-left: 10px;
+    font-weight: bold;
+    transition: background-color 0.5s ease, padding-left 0.3s ease;
+}
 
 .conteudo {
     margin-left: 220px;
