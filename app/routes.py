@@ -28,10 +28,8 @@ def cadastro_salas():
                 db.session.rollback()
                 flash(f'Erro ao cadastrar sala: {e}', 'danger')
 
-    # (Opcional) buscar todas as salas para exibir na página
     salas = Sala.query.all()
     return render_template('cadastro_salas.html', salas=salas)
-
 
 
 @main.route('/delete_sala/<int:sala_id>', methods=['GET', 'POST'])
@@ -53,14 +51,14 @@ def cadastro_equipamentos():
         nome = request.form.get('nome')
         quantidade = request.form.get('quantidade')
         valor = request.form.get('valor')
-        # cria e salva a sala
+
         equipamento = Equipamento(nome=nome, valor=valor, quantidade=quantidade)
         db.session.add(equipamento)
         db.session.commit()
         flash('Equipamento cadastrada com sucesso!', 'success')
         return redirect(url_for('main.cadastro_equipamentos'))
 
-    # (Opcional) buscar todos os Equipamentos para exibir na página
+
     tabela = Equipamento.query.all()
     return render_template('cadastro_equipamentos.html', Equipamentos=tabela)
 
@@ -78,31 +76,61 @@ def delete_equipamento(id):
     return redirect(url_for('main.cadastro_equipamentos'))
 
 
-@main.route('/formulario/cadastro', methods=['GET','POST'])
+@main.route('/formulario/cadastro', methods=['GET', 'POST'])
 def formulario_cadastro():
     if request.method == 'POST':
+        # Validação de campos obrigatórios
         nome = request.form.get('nome_locatario')
-        email = request.form.get('email_locatario')
-        telefone = request.form.get('telefone_locatario')
-        data = request.form.get('data_locatario')
-        sala = request.form.get('sala_locatario')
-        observacao_responsavel = request.form.get('observacao_responsavel_coop')
-        observacao = request.form.get('observacao_locatario')
-        assinatura = request.form.get('assinatura_locatario')
-        equipamentos = request.form.get('equipamentos')
+        if not nome:
+            flash('O nome do locatário é obrigatório.', 'danger')
+            return redirect(url_for('main.formulario_cadastro'))
 
-        formulario = Formulario(nome_locatario=nome, sala=sala, email_locatario=email, telefone_locatario=telefone,
-        data_locacao=data , observacao_responsavel_coop=observacao_responsavel, observacao_locatario=observacao,
-        assinatura=assinatura, equipamentos=equipamentos, fotos=1.0)
+        sala_id = request.form.get('sala_locatario')
+        if not sala_id:
+            flash('Selecione uma sala.', 'danger')
+            return redirect(url_for('main.formulario_cadastro'))
+        # Converte sala_id para inteiro ao invés de atribuir objeto Sala
+        sala_id = int(sala_id)
 
+        # Campos opcionais
+        email = request.form.get('email_locatario') or ''
+        telefone = request.form.get('telefone_locatario') or ''
+        observacao_responsavel = request.form.get('observacao_responsavel_coop') or ''
 
+        # Equipamentos pode ser múltiplo
+        equipamentos_list = request.form.getlist('equipamentos')
+        equipamentos = ','.join(equipamentos_list)
 
-        db.session.add(formulario)
-        db.session.commit()
+        # Cria instância do formulário atribuindo a chave estrangeira diretamente
+        formulario = Formulario(
+            nome_locatario=nome,
+            sala=sala_id,
+            email_locatario=email,
+            telefone_locatario=telefone,
+            data_locacao=datetime.utcnow(),
+            observacao_responsavel_coop=observacao_responsavel,
+            equipamentos=equipamentos
+        )
 
-        return redirect(url_for('main.formulario_cadastro'))
+        try:
+            db.session.add(formulario)
+            db.session.commit()
+            flash('Formulário salvo com sucesso!', 'success')
+            return redirect(url_for('main.formulario_cadastro'))
+        except Exception as e:
+            db.session.rollback()
+            flash(f'Erro ao salvar formulário: {e}', 'danger')
+            return redirect(url_for('main.formulario_cadastro'))
 
-    return render_template('formulario_cadastro.html')
+    # GET: exibe o formulário com listas de salas e equipamentos
+    salas = Sala.query.order_by(Sala.nome).all()
+    equipamentos = Equipamento.query.order_by(Equipamento.nome).all()
+    return render_template(
+        'formulario_cadastro.html',
+        salas=salas,
+        equipamentos=equipamentos
+    )
+
 
 @main.route('/formulario')
 def formulario():
@@ -110,7 +138,6 @@ def formulario():
     tabela = Formulario.query.all()
 
     return render_template('formulario.html', tabela=tabela)
-
 
 
 @main.route('/formulario/view/<id>')
@@ -121,3 +148,14 @@ def formulario_view(id):
     return render_template('formulario_view.html', formulario=formulario)
 
 
+@main.route('/formulario/<int:sala_id>', methods=['GET', 'POST'])
+def delete_formulario(sala_id):
+    sala = Formulario.query.get_or_404(sala_id)
+    try:
+        db.session.delete(sala)
+        db.session.commit()
+        flash('Sala excluída com sucesso!', 'success')
+    except Exception as e:
+        db.session.rollback()
+        flash(f'Erro ao excluir sala: {e}', 'danger')
+    return redirect(url_for('main.formulario'))

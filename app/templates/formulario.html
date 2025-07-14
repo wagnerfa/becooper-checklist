@@ -8,14 +8,16 @@
                 <th>Nome Locatário</th>
                 <th>Sala</th>
                 <th>Data</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
             {% for row in tabela %}
-            <tr>
-                <td>{{ row.nome }}</td>
+            <tr>              
+                <td><a href="/formulario/view/{{row.id}}" style="color: black; font-size: 16px;">{{ row.nome_locatario }}</a></td>
                 <td>{{ row.sala }}</td>
                 <td>{{ row.data_locacao }}</td>
+                <td><a href="/formulario/{{row.id}}">🗑️</a></td>
             </tr>
             {% endfor %}
         </tbody>

@@ -2,12 +2,14 @@ from datetime import datetime
 from . import db
 
 class Sala(db.Model):
+
     __tablename__ = 'salas'
     id = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(100), nullable=False)
     capacidade = db.Column(db.Integer, nullable=False)
 
 class Equipamento(db.Model):
+
     __tablename__ = 'equipamentos'
     id = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(100), nullable=False)
@@ -15,6 +17,7 @@ class Equipamento(db.Model):
     valor = db.Column(db.Numeric(10, 2), nullable=False)
 
 class Formulario(db.Model):
+
     __tablename__ = 'formularios'
     id = db.Column(db.Integer, primary_key=True)
     nome_locatario = db.Column(db.String(100), nullable=False)
@@ -33,6 +36,7 @@ class Formulario(db.Model):
                             cascade='all, delete-orphan')
 
 class Foto(db.Model):
+
     __tablename__ = 'fotos'
     id = db.Column(db.Integer, primary_key=True)
     id_formulario = db.Column(db.Integer,

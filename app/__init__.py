@@ -1,23 +1,27 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 from config import Config
 
 db = SQLAlchemy()
+migrate = Migrate()
 
 def create_app():
-    app = Flask(__name__, instance_relative_config=False)
+    # Habilita configs da pasta instance/
+    app = Flask(__name__, instance_relative_config=True)
+    # Carrega Config padrão e depois instance/config.py (se existir)
     app.config.from_object(Config)
+    app.config.from_pyfile('config.py', silent=True)
 
-    # inicializa DB
     db.init_app(app)
+    migrate.init_app(app, db)
 
-    # cria as tabelas, se não existirem
+    # Cria todas as tabelas definidas nos models (incluindo `salas`)
     with app.app_context():
-        from . import models
         db.create_all()
 
-    # registra as rotas
-    from .routes import main as main_blueprint
-    app.register_blueprint(main_blueprint)
+    # Importa e registra as rotas
+    from app import routes
+    app.register_blueprint(routes.main)
 
     return app
