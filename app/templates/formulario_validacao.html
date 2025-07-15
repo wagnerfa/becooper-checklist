@@ -1,41 +1,63 @@
+{% extends "base.html" %}
+{% block content %}
 
-  <h2>Validação do Checklist</h2>
-  <p><strong>Locatário:</strong> {{ formulario.nome_locatario }}</p>
-  <p><strong>Sala:</strong> {{ formulario.sala }}</p>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 
-  <form method="post" enctype="multipart/form-data">
-    <fieldset>
-      <legend>Equipamentos</legend>
-      {% for eq in equipamentos %}
-        <div>
-          <input
-            type="checkbox"
-            id="equip_{{ loop.index }}"
-            name="equipamentos"
-            value="{{ eq }}"
-            {% if formulario.equipamentos_validados %}
-              {% set ev = formulario.equipamentos_validados | loads %}
-              {% if ev[eq] %}checked{% endif %}
-            {% endif %}
-          >
-          <label for="equip_{{ loop.index }}">{{ eq }}</label>
+<div class="conteudo">
+    <div class="container">
+        <div class="title">Locação de Sala</div>
+
+        <!-- Locatário -->
+        <div class="section">
+            <div class="section-title">Nome do Locatário</div>
+            <div class="section-value"> {{ formulario.nome}} </div>
         </div>
-      {% endfor %}
-    </fieldset>
 
-    <div>
-      <label for="observacao_locatario">Observações (se necessário):</label>
-      <textarea
-        id="observacao_locatario"
-        name="observacao_locatario"
-        rows="4"
-      >{{ formulario.observacao_locatario }}</textarea>
+        <!-- Sala e Contato -->
+        <div class="section row">
+            <div class="col">
+                <div class="section-title">Sala</div>
+                <div class="section-value"> {{ formulario.sala }} </div>
+            </div>
+            <div class="col">
+                <div class="section-title">Telefone</div>
+                <div class="section-value"> {{ formulario.telefone_locatario }} </div>
+            </div>
+            <div class="col">
+                <div class="section-title">E-mail</div>
+                <div class="section-value"> {{ formulario.email_locatario }} </div>
+            </div>
+        </div>
+
+
+        <!-- Data e Observações -->
+        <div class="section row">
+            <div class="col">
+                <div class="section-title">Data da Locação</div>
+                <div class="section-value">  </div>
+            </div>
+            <div class="col">
+                <div class="section-title">Observação (Responsável)</div>
+                <div class="section-value"> {{ formulario.observacao_responsavel_coop }} </div>
+            </div>
+            <div class="col">
+                <div class="section-title">Observação (Locatário)</div>
+                <div class="section-value"> {{ formulario.observacao_locatario }} </div>
+            </div>
+        </div>
+
+        <!-- Equipamentos -->
+        <div class="section">
+            <div class="section-title">Equipamentos</div>
+            <div class="section-value"> {{ formulario.equipamentos }} </div>
+        </div>
+
+        <!-- Assinatura -->
+        <div class="section">
+            <div class="section-title">Assinatura</div>
+            <div class="section-value"> {{ formulario.assinatura }} </div>
+        </div>
     </div>
+</div>
 
-    <div>
-      <label for="fotos">Anexar fotos:</label>
-      <input type="file" name="fotos" id="fotos" multiple>
-    </div>
-
-    <button type="submit">Enviar validação</button>
-  </form>
+{% endblock %}
