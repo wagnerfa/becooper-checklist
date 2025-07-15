@@ -1,0 +1,41 @@
+
+  <h2>Validação do Checklist</h2>
+  <p><strong>Locatário:</strong> {{ formulario.nome_locatario }}</p>
+  <p><strong>Sala:</strong> {{ formulario.sala }}</p>
+
+  <form method="post" enctype="multipart/form-data">
+    <fieldset>
+      <legend>Equipamentos</legend>
+      {% for eq in equipamentos %}
+        <div>
+          <input
+            type="checkbox"
+            id="equip_{{ loop.index }}"
+            name="equipamentos"
+            value="{{ eq }}"
+            {% if formulario.equipamentos_validados %}
+              {% set ev = formulario.equipamentos_validados | loads %}
+              {% if ev[eq] %}checked{% endif %}
+            {% endif %}
+          >
+          <label for="equip_{{ loop.index }}">{{ eq }}</label>
+        </div>
+      {% endfor %}
+    </fieldset>
+
+    <div>
+      <label for="observacao_locatario">Observações (se necessário):</label>
+      <textarea
+        id="observacao_locatario"
+        name="observacao_locatario"
+        rows="4"
+      >{{ formulario.observacao_locatario }}</textarea>
+    </div>
+
+    <div>
+      <label for="fotos">Anexar fotos:</label>
+      <input type="file" name="fotos" id="fotos" multiple>
+    </div>
+
+    <button type="submit">Enviar validação</button>
+  </form>
