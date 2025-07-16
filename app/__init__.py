@@ -1,23 +1,25 @@
+import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 from config import Config
 
 db = SQLAlchemy()
+migrate = Migrate()
 
 def create_app():
-    app = Flask(__name__, instance_relative_config=False)
+    app = Flask(__name__)
     app.config.from_object(Config)
 
-    # inicializa DB
+    os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
+
     db.init_app(app)
+    migrate.init_app(app, db)
 
-    # cria as tabelas, se não existirem
+    from app import routes
+    app.register_blueprint(routes.main)
+
     with app.app_context():
-        from . import models
         db.create_all()
-
-    # registra as rotas
-    from .routes import main as main_blueprint
-    app.register_blueprint(main_blueprint)
 
     return app

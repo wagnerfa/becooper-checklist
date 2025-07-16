@@ -7,6 +7,7 @@
     box-sizing: border-box;
 }
 
+
 p,
 a {
     font-family: 'Lato', sans-serif;
@@ -35,6 +36,12 @@ form {
 .campo {
     display: flex;
     flex-direction: column;
+}
+
+textarea {
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    padding: 10px;
 }
 
 label {
@@ -68,8 +75,6 @@ a {
     text-decoration: none;
 }
 
-/* SideBar */
-
 .sidebar {
     position: fixed;
     top: 0;
@@ -91,6 +96,7 @@ a {
     height: auto;
     z-index: 0;
     pointer-events: none;
+    position: fixed;
 
 }
 
@@ -112,16 +118,13 @@ a {
     padding-left: 10px;
 }
 
-.conteudo {
-    margin-left: 220px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    padding: 20px;
-    box-sizing: border-box;
+.sidebar a.active {
+    background-color: #004080;
+    border-radius: 5px;
+    padding-left: 10px;
+    font-weight: bold;
+    transition: background-color 0.5s ease, padding-left 0.3s ease;
 }
-
 
 .conteudo {
     margin-left: 220px;
@@ -133,42 +136,146 @@ a {
     min-height: auto;
 }
 
-
 form {
     margin-bottom: 30px;
 }
-
 
 .table-salas {
     width: 100%;
     max-width: 800px;
     border-collapse: collapse;
-    background: #fff;
-    border-radius: 6px;
+    background: #ffffff;
+    border-radius: 12px;
     overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.table-salas th,
+.table-salas td {
+    padding: 14px 16px;
+    text-align: left;
+    border-bottom: 1px solid #e9ecef;
+}
+
+select:focus {
+    outline: none;
+    border-color: black;
 }
 
 
+/* Alinhamento do Número */
+
+.numero {
+    text-align: left;
+}
 
 .table-salas th {
-    background: #fff;
+    background-color: #007bff;
+    color: white;
     font-weight: bold;
+    font-size: 16px;
 }
 
 .table-salas tr:last-child td {
     border-bottom: none;
 }
 
-.table-salas button {
-    padding: 6px 12px;
-    font-size: 14px;
-    background: #dc3545;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+.table-salas tr:hover {
+    background-color: #f1f9ff;
 }
 
-.table-salas button:hover {
-    background: #c82333;
+.table-salas td a {
+    text-decoration: none;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 14px;
+    display: inline-block;
+}
+
+/* Bottom Select Equipamentos */
+
+label {
+    font-size: 16px;
+    margin-bottom: 10px;
+    display: block;
+}
+
+select {
+    padding: 10px 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: white;
+    color: black;
+    appearance: none;
+
+}
+
+/* Forulario View */
+
+.container {
+    max-width: 960px;
+    background-color: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.title {
+    text-align: center;
+    font-size: 30px;
+    font-weight: 600;
+    color: #007bff;
+    margin-bottom: 40px;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 10px;
+}
+
+.section {
+    margin-bottom: 30px;
+    border-left: 4px solid #007bff;
+    padding-left: 20px;
+}
+
+.section-title {
+    font-weight: 600;
+    color: #007bff;
+    font-size: 16px;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.section-value {
+    font-size: 17px;
+    color: #333;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.col {
+    flex: 1;
+    min-width: 250px;
+}
+
+.checkbox-group {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 0.5rem;
+}
+
+.checkbox-item {
+    display: flex;
+    align-items: center;
+}
+
+.checkbox-item input {
+    margin-right: 0.5rem;
 }
