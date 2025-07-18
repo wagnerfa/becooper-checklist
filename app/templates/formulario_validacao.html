@@ -1,63 +1,78 @@
-{% extends "base.html" %}
-{% block content %}
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-
-<div class="conteudo">
-    <div class="container">
-        <div class="title">Locação de Sala</div>
-
-        <!-- Locatário -->
-        <div class="section">
-            <div class="section-title">Nome do Locatário</div>
-            <div class="section-value"> {{ formulario.nome}} </div>
-        </div>
-
-        <!-- Sala e Contato -->
-        <div class="section row">
-            <div class="col">
-                <div class="section-title">Sala</div>
-                <div class="section-value"> {{ formulario.sala }} </div>
-            </div>
-            <div class="col">
-                <div class="section-title">Telefone</div>
-                <div class="section-value"> {{ formulario.telefone_locatario }} </div>
-            </div>
-            <div class="col">
-                <div class="section-title">E-mail</div>
-                <div class="section-value"> {{ formulario.email_locatario }} </div>
-            </div>
-        </div>
-
-
-        <!-- Data e Observações -->
-        <div class="section row">
-            <div class="col">
-                <div class="section-title">Data da Locação</div>
-                <div class="section-value">  </div>
-            </div>
-            <div class="col">
-                <div class="section-title">Observação (Responsável)</div>
-                <div class="section-value"> {{ formulario.observacao_responsavel_coop }} </div>
-            </div>
-            <div class="col">
-                <div class="section-title">Observação (Locatário)</div>
-                <div class="section-value"> {{ formulario.observacao_locatario }} </div>
-            </div>
-        </div>
-
-        <!-- Equipamentos -->
-        <div class="section">
-            <div class="section-title">Equipamentos</div>
-            <div class="section-value"> {{ formulario.equipamentos }} </div>
-        </div>
-
-        <!-- Assinatura -->
-        <div class="section">
-            <div class="section-title">Assinatura</div>
-            <div class="section-value"> {{ formulario.assinatura }} </div>
-        </div>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Validação do Checklist</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='validacao.css') }}">
+</head>
+<body>
+  <div class="container">
+    <div class="form-header">
+      <h2>Validação do Checklist</h2>
+      <div class="form-info">
+        <span class="info-badge"><strong>Locatário:</strong> {{ formulario.nome_locatario }}</span>
+        <span class="info-badge"><strong>Sala:</strong> {{ formulario.sala }}</span>
+      </div>
     </div>
-</div>
 
-{% endblock %}
+    <form method="post" enctype="multipart/form-data">
+
+      <!-- Equipamentos -->
+      <fieldset>
+        <legend>Equipamentos:</legend>
+        <ul class="equipamentos-list">
+          {% for eq in equipamentos %}
+            <li>
+              <label>
+                <input type="checkbox" name="equipamentos" value="{{ eq }}" {% if formulario.equipamentos_validados[eq] %}checked{% endif %}>
+                {{ eq }}
+              </label>
+            </li>
+          {% endfor %}
+        </ul>
+      </fieldset>
+
+      <!-- Observações -->
+      <div class="form-group">
+        <label for="observacao_locatario">Observações:</label>
+        <textarea id="observacao_locatario" name="observacao_locatario" rows="4" placeholder="Descreva observações, problemas, etc...">{{ formulario.observacao_locatario }}</textarea>
+      </div>
+
+      <!-- Upload -->
+      <div class="form-group">
+        <label for="fotos">Anexar fotos:</label>
+        <div class="file-input-wrapper">
+          <label class="file-trigger" for="fotos">Selecionar arquivos</label>
+          <input type="file" name="fotos" id="fotos" multiple>
+          <span class="file-return" data-placeholder="Nenhum arquivo selecionado">Nenhum arquivo selecionado</span>
+        </div>
+      </div>
+
+      <!-- Botão de enviar -->
+      <div class="form-actions">
+        <button type="submit">Enviar validação</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Mostra os nomes dos arquivos-->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const input = document.getElementById('fotos');
+      const out = document.querySelector('.file-return');
+      if (input && out) {
+        input.addEventListener('change', () => {
+          if (input.files.length === 0) {
+            out.textContent = out.dataset.placeholder;
+          } else if (input.files.length === 1) {
+            out.textContent = input.files[0].name;
+          } else {
+            out.textContent = `${input.files.length} arquivos selecionados`;
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>
